@@ -1,13 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class ColliderController : MonoBehaviour
+public class NextButtonHandler : MonoBehaviour
 {
+    public Button nextButton;
     // Start is called before the first frame update
     void Start()
     {
-        
+        nextButton.onClick.AddListener(Next);
     }
 
     // Update is called once per frame
@@ -16,12 +19,8 @@ public class ColliderController : MonoBehaviour
         
     }
 
-    void OnTriggerEnter(Collider other)
+    void Next()
     {
-        if (other.tag == "Player")
-        {
-            Debug.Log("Quit");
-            Application.Quit();
-        }
+        SceneManager.LoadScene(0);
     }
 }

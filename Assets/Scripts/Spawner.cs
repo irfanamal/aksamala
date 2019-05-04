@@ -6,6 +6,7 @@ public class Spawner : MonoBehaviour
 {
     public GameObject tree;
     public GameObject crystal;
+    public GameObject orb;
 
     private void Awake()
     {
@@ -322,6 +323,25 @@ public class Spawner : MonoBehaviour
             Vector3 spawnPosition = new Vector3(80.0f, tree.transform.position.y, i);
             Quaternion spawnRotation = Quaternion.identity;
             Instantiate(tree, spawnPosition, spawnRotation);
+        }
+
+        //Orb
+        List<Vector2> spawnPos = new List<Vector2>();
+        float[] availPos = { 15.0f, 25.0f, 35.0f, 45.0f, 55.0f, 65.0f, 75.0f, 85.0f };
+        while (spawnPos.Count < 10)
+        {
+            float xPos = availPos[Random.Range(0, 8)];
+            float yPos = availPos[Random.Range(0, 8)];
+            Vector2 orbPos = new Vector2(xPos, yPos);
+            if (!spawnPos.Contains(orbPos) && orbPos != new Vector2(15.0f, 15.0f))
+            {
+                spawnPos.Add(orbPos);
+            }
+        }
+        foreach (Vector2 pos in spawnPos)
+        {
+            Vector3 spawnPosition = new Vector3(pos.x, 2.0f, pos.y);
+            Instantiate(orb, spawnPosition, Quaternion.identity);
         }
     }
 }
